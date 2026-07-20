@@ -28,10 +28,21 @@ public class WarehouseService {
     }
 
     public Warehouse updateWarehouse(Warehouse warehouse) {
+        if (getWarehouseById(warehouse.getId()).isEmpty()) {
+            throw new RuntimeException("Warehouse does not exist.");
+        }
         return this.warehouseRepository.save(warehouse);
     }
 
     public void deleteWarehouse(Warehouse warehouse) {
         this.warehouseRepository.delete(warehouse);
+    }
+
+    public List<Warehouse> findWarehouseByName(String name) {
+        return this.warehouseRepository.findByName(name);
+    }
+
+    public List<Warehouse> findWarehouseByLocation(String location) {
+        return this.warehouseRepository.findByLocation(location);
     }
 }
