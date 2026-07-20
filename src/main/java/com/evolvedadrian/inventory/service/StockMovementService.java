@@ -28,6 +28,9 @@ public class StockMovementService {
     }
 
     public StockMovement updateStockMovement(StockMovement stockMovement) {
+        if(getStockMovementById(stockMovement.getId()).isEmpty()){
+            throw new RuntimeException("Stock movement does not exist.");
+        }
         return this.stockMovementRepository.save(stockMovement);
     }
 
