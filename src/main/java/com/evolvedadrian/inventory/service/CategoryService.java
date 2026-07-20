@@ -24,14 +24,24 @@ public class CategoryService {
     }
 
     public Category createCategory(Category category) {
+        if (findCategoryByName(category.getName()).isPresent()) {
+            throw new RuntimeException("Category already exists.");
+        }
         return this.categoryRepository.save(category);
     }
 
     public Category updateCategory(Category category) {
+        if (getCategoryById(category.getId()).isEmpty()) {
+            throw new RuntimeException("Category does not exist.");
+        }
         return this.categoryRepository.save(category);
     }
 
     public void deleteCategory(Category category) {
         this.categoryRepository.delete(category);
+    }
+
+    public Optional<Category> findCategoryByName(String name) {
+        return this.categoryRepository.findByName(name);
     }
 }
