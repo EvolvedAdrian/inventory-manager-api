@@ -28,10 +28,17 @@ public class SupplierService {
     }
 
     public Supplier updateSupplier(Supplier supplier) {
+        if (getSupplierById(supplier.getId()).isEmpty()) {
+            throw new RuntimeException("Supplier does not exist.");
+        }
         return this.supplierRepository.save(supplier);
     }
 
     public void deleteSupplier(Supplier supplier) {
         this.supplierRepository.delete(supplier);
+    }
+
+    public List<Supplier> findSupplierByName(String name) {
+        return this.supplierRepository.findByName(name);
     }
 }
