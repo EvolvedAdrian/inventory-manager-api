@@ -24,14 +24,24 @@ public class ProductService {
     }
 
     public Product createProduct(Product product) {
+        if (findProductBySku(product.getSku()).isPresent()) {
+            throw new RuntimeException("Product already exists.");
+        }
         return this.productRepository.save(product);
     }
 
     public Product updateProduct(Product product) {
+        if (getProductById(product.getId()).isEmpty()) {
+            throw new RuntimeException("Product does not exist.");
+        }
         return this.productRepository.save(product);
     }
 
     public void deleteProduct(Product product) {
         this.productRepository.delete(product);
+    }
+
+    public Optional<Product> findProductBySku(String sku) {
+        return this.productRepository.findBySku(sku);
     }
 }
