@@ -19,8 +19,8 @@ public class SupplierService {
         return this.supplierRepository.findAll();
     }
 
-    public Optional<Supplier> getSupplierById(Integer id) {
-        return this.supplierRepository.findById(id);
+    public Supplier getSupplierById(Integer id) {
+        return this.supplierRepository.findById(id).orElseThrow(() -> new RuntimeException("Supplier not found."));
     }
 
     public Supplier createSupplier(Supplier supplier) {
@@ -28,13 +28,14 @@ public class SupplierService {
     }
 
     public Supplier updateSupplier(Supplier supplier) {
-        if (getSupplierById(supplier.getId()).isEmpty()) {
+        if (!this.supplierRepository.existsById(supplier.getId())) {
             throw new RuntimeException("Supplier does not exist.");
         }
         return this.supplierRepository.save(supplier);
     }
 
-    public void deleteSupplier(Supplier supplier) {
+    public void deleteSupplier(Integer id) {
+        Supplier supplier = getSupplierById(id);
         this.supplierRepository.delete(supplier);
     }
 

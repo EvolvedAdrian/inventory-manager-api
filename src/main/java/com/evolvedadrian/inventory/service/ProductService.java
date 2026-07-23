@@ -4,6 +4,7 @@ import com.evolvedadrian.inventory.entity.Category;
 import com.evolvedadrian.inventory.entity.Product;
 import com.evolvedadrian.inventory.entity.Supplier;
 import com.evolvedadrian.inventory.repository.ProductRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -22,25 +23,27 @@ public class ProductService {
         return this.productRepository.findAll();
     }
 
-    public Optional<Product> getProductById(Integer id) {
-        return this.productRepository.findById(id);
+    public Product getProductById(Integer id) {
+        return this.productRepository.findById(id).orElseThrow(() -> new RuntimeException("Product not found."));
     }
 
     public Product createProduct(Product product) {
-        if (findProductBySku(product.getSku()).isPresent()) {
+        try {
+            return this.productRepository.save(product);
+        }catch (DataIntegrityViolationException ex){
             throw new RuntimeException("Product already exists.");
         }
-        return this.productRepository.save(product);
     }
 
     public Product updateProduct(Product product) {
-        if (getProductById(product.getId()).isEmpty()) {
+        if (!this.productRepository.existsById(product.getId())) {
             throw new RuntimeException("Product does not exist.");
         }
         return this.productRepository.save(product);
     }
 
-    public void deleteProduct(Product product) {
+    public void deleteProduct(Integer id) {
+        Product product = getProductById(id);
         this.productRepository.delete(product);
     }
 

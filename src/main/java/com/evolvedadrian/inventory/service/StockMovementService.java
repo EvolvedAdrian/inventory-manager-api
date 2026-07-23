@@ -23,8 +23,8 @@ public class StockMovementService {
         return this.stockMovementRepository.findAll();
     }
 
-    public Optional<StockMovement> getStockMovementById(Integer id) {
-        return this.stockMovementRepository.findById(id);
+    public StockMovement getStockMovementById(Integer id) {
+        return this.stockMovementRepository.findById(id).orElseThrow(() -> new RuntimeException("Stock Movement not found."));
     }
 
     public StockMovement createStockMovement(StockMovement stockMovement) {
@@ -32,13 +32,14 @@ public class StockMovementService {
     }
 
     public StockMovement updateStockMovement(StockMovement stockMovement) {
-        if (getStockMovementById(stockMovement.getId()).isEmpty()) {
+        if (!this.stockMovementRepository.existsById(stockMovement.getId())) {
             throw new RuntimeException("Stock movement does not exist.");
         }
         return this.stockMovementRepository.save(stockMovement);
     }
 
-    public void deleteStockMovement(StockMovement stockMovement) {
+    public void deleteStockMovement(Integer id) {
+        StockMovement stockMovement = getStockMovementById(id);
         this.stockMovementRepository.delete(stockMovement);
     }
 

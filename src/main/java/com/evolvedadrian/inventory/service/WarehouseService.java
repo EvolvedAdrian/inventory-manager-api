@@ -19,8 +19,8 @@ public class WarehouseService {
         return this.warehouseRepository.findAll();
     }
 
-    public Optional<Warehouse> getWarehouseById(Integer id) {
-        return this.warehouseRepository.findById(id);
+    public Warehouse getWarehouseById(Integer id) {
+        return this.warehouseRepository.findById(id).orElseThrow(() -> new RuntimeException("Warehouse not found."));
     }
 
     public Warehouse createWarehouse(Warehouse warehouse) {
@@ -28,13 +28,14 @@ public class WarehouseService {
     }
 
     public Warehouse updateWarehouse(Warehouse warehouse) {
-        if (getWarehouseById(warehouse.getId()).isEmpty()) {
+        if (!this.warehouseRepository.existsById(warehouse.getId())) {
             throw new RuntimeException("Warehouse does not exist.");
         }
         return this.warehouseRepository.save(warehouse);
     }
 
-    public void deleteWarehouse(Warehouse warehouse) {
+    public void deleteWarehouse(Integer id) {
+        Warehouse warehouse = getWarehouseById(id);
         this.warehouseRepository.delete(warehouse);
     }
 

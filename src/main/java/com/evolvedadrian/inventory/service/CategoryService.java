@@ -2,6 +2,7 @@ package com.evolvedadrian.inventory.service;
 
 import com.evolvedadrian.inventory.entity.Category;
 import com.evolvedadrian.inventory.repository.CategoryRepository;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,25 +20,27 @@ public class CategoryService {
         return this.categoryRepository.findAll();
     }
 
-    public Optional<Category> getCategoryById(Integer id) {
-        return this.categoryRepository.findById(id);
+    public Category getCategoryById(Integer id) {
+        return this.categoryRepository.findById(id).orElseThrow(() -> new RuntimeException("Category not found."));
     }
 
     public Category createCategory(Category category) {
-        if (findCategoryByName(category.getName()).isPresent()) {
+        try {
+            return this.categoryRepository.save(category);
+        }catch (DataIntegrityViolationException ex){
             throw new RuntimeException("Category already exists.");
         }
-        return this.categoryRepository.save(category);
     }
 
     public Category updateCategory(Category category) {
-        if (getCategoryById(category.getId()).isEmpty()) {
+        if (!this.categoryRepository.existsById(category.getId())) {
             throw new RuntimeException("Category does not exist.");
         }
         return this.categoryRepository.save(category);
     }
 
-    public void deleteCategory(Category category) {
+    public void deleteCategory(Integer id) {
+        Category category = getCategoryById(id);
         this.categoryRepository.delete(category);
     }
 
