@@ -1,8 +1,6 @@
 package com.evolvedadrian.inventory.service;
 
-import com.evolvedadrian.inventory.entity.Category;
 import com.evolvedadrian.inventory.entity.Product;
-import com.evolvedadrian.inventory.entity.Supplier;
 import com.evolvedadrian.inventory.repository.ProductRepository;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -30,7 +28,7 @@ public class ProductService {
     public Product createProduct(Product product) {
         try {
             return this.productRepository.save(product);
-        }catch (DataIntegrityViolationException ex){
+        } catch (DataIntegrityViolationException ex) {
             throw new RuntimeException("Product already exists.");
         }
     }
@@ -51,19 +49,19 @@ public class ProductService {
         return this.productRepository.findBySku(sku);
     }
 
-    public List<Product> findProductsByName(String name){
+    public List<Product> findProductsByName(String name) {
         return this.productRepository.findByName(name);
     }
 
-    public List<Product> findProductsByCategory(Integer categoryId){
+    public List<Product> findProductsByCategory(Integer categoryId) {
         return this.productRepository.findByCategoryId(categoryId);
     }
 
-    public List<Product> findProductsBySupplier(Integer supplierId){
+    public List<Product> findProductsBySupplier(Integer supplierId) {
         return this.productRepository.findBySupplierId(supplierId);
     }
 
-    public List<Product> findProductsByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice){
+    public List<Product> findProductsByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice) {
         return this.productRepository.findByPriceBetween(minPrice, maxPrice);
     }
 }

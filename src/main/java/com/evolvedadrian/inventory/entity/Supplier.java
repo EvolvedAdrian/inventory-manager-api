@@ -1,6 +1,9 @@
 package com.evolvedadrian.inventory.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 public class Supplier {
     @Id
@@ -23,28 +26,28 @@ public class Supplier {
         return this.id;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public String getPhone() {
-        return this.phone;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getPhone() {
+        return this.phone;
     }
 
     public void setPhone(String phone) {

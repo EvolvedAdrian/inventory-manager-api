@@ -5,7 +5,6 @@ import com.evolvedadrian.inventory.service.SupplierService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class SupplierController {
     private final SupplierService supplierService;

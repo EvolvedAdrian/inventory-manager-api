@@ -1,8 +1,6 @@
 package com.evolvedadrian.inventory.repository;
 
-import com.evolvedadrian.inventory.entity.Product;
 import com.evolvedadrian.inventory.entity.StockMovement;
-import com.evolvedadrian.inventory.entity.Warehouse;
 import com.evolvedadrian.inventory.enums.MovementType;
 import org.springframework.data.jpa.repository.JpaRepository;
 

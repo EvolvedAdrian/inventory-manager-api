@@ -1,15 +1,12 @@
 package com.evolvedadrian.inventory.service;
 
-import com.evolvedadrian.inventory.entity.Product;
 import com.evolvedadrian.inventory.entity.StockMovement;
-import com.evolvedadrian.inventory.entity.Warehouse;
 import com.evolvedadrian.inventory.enums.MovementType;
 import com.evolvedadrian.inventory.repository.StockMovementRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class StockMovementService {

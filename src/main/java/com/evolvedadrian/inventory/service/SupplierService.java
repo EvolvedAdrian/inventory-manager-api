@@ -5,7 +5,6 @@ import com.evolvedadrian.inventory.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class SupplierService {

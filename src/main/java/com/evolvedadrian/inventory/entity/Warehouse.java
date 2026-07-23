@@ -1,6 +1,9 @@
 package com.evolvedadrian.inventory.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 public class Warehouse {
     @Id
@@ -20,20 +23,20 @@ public class Warehouse {
         return this.id;
     }
 
-    public String getName() {
-        return this.name;
-    }
-
-    public String getLocation() {
-        return this.location;
-    }
-
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLocation() {
+        return this.location;
     }
 
     public void setLocation(String location) {

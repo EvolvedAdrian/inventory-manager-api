@@ -12,37 +12,37 @@ import java.util.Optional;
 public class CategoryController {
     private final CategoryService categoryService;
 
-    public CategoryController(CategoryService categoryService){
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
     }
 
     @GetMapping
-    public List<Category> getAllCategories(){
+    public List<Category> getAllCategories() {
         return this.categoryService.getAllCategories();
     }
 
     @GetMapping("/{id}")
-    public Category getCategoryById(@PathVariable Integer id){
+    public Category getCategoryById(@PathVariable Integer id) {
         return this.categoryService.getCategoryById(id);
     }
 
     @GetMapping("/name/{name}")
-    public Optional<Category> findCategoryByName(@PathVariable String name){
+    public Optional<Category> findCategoryByName(@PathVariable String name) {
         return this.categoryService.findCategoryByName(name);
     }
 
     @PostMapping
-    public Category createCategory(@RequestBody Category category){
+    public Category createCategory(@RequestBody Category category) {
         return this.categoryService.createCategory(category);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCategory(@PathVariable Integer id){
+    public void deleteCategory(@PathVariable Integer id) {
         this.categoryService.deleteCategory(id);
     }
 
     @PutMapping("/{id}")
-    public Category updateCategory(@PathVariable Integer id, @RequestBody Category category){
+    public Category updateCategory(@PathVariable Integer id, @RequestBody Category category) {
         category.setId(id);
         return this.categoryService.updateCategory(category);
     }

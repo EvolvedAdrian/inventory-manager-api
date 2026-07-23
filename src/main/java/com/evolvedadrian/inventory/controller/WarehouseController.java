@@ -5,7 +5,6 @@ import com.evolvedadrian.inventory.service.WarehouseService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 public class WarehouseController {
     private final WarehouseService warehouseService;
@@ -30,7 +29,7 @@ public class WarehouseController {
     }
 
     @GetMapping("/location/{location}")
-    public List<Warehouse> findWarehouseByLocation(@PathVariable String location){
+    public List<Warehouse> findWarehouseByLocation(@PathVariable String location) {
         return this.warehouseService.findWarehouseByLocation(location);
     }
 

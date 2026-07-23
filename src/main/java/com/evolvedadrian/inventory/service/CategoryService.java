@@ -27,7 +27,7 @@ public class CategoryService {
     public Category createCategory(Category category) {
         try {
             return this.categoryRepository.save(category);
-        }catch (DataIntegrityViolationException ex){
+        } catch (DataIntegrityViolationException ex) {
             throw new RuntimeException("Category already exists.");
         }
     }
