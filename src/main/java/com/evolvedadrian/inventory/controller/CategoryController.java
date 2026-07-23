@@ -1,0 +1,49 @@
+package com.evolvedadrian.inventory.controller;
+
+import com.evolvedadrian.inventory.entity.Category;
+import com.evolvedadrian.inventory.service.CategoryService;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Optional;
+
+@RestController
+@RequestMapping("/categories")
+public class CategoryController {
+    private final CategoryService categoryService;
+
+    public CategoryController(CategoryService categoryService){
+        this.categoryService = categoryService;
+    }
+
+    @GetMapping
+    public List<Category> getAllCategories(){
+        return this.categoryService.getAllCategories();
+    }
+
+    @GetMapping("/{id}")
+    public Category getCategoryById(@PathVariable Integer id){
+        return this.categoryService.getCategoryById(id);
+    }
+
+    @GetMapping("/name/{name}")
+    public Optional<Category> findCategoryByName(@PathVariable String name){
+        return this.categoryService.findCategoryByName(name);
+    }
+
+    @PostMapping
+    public Category createCategory(@RequestBody Category category){
+        return this.categoryService.createCategory(category);
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteCategory(@PathVariable Integer id){
+        this.categoryService.deleteCategory(id);
+    }
+
+    @PutMapping("/{id}")
+    public Category updateCategory(@PathVariable Integer id, @RequestBody Category category){
+        category.setId(id);
+        return this.categoryService.updateCategory(category);
+    }
+}
