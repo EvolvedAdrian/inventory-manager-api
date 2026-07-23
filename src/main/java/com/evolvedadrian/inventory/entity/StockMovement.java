@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
+@Entity
+@Table(name = "stock_movement")
 public class StockMovement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
