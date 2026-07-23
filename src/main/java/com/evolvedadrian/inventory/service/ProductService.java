@@ -55,12 +55,12 @@ public class ProductService {
         return this.productRepository.findByName(name);
     }
 
-    public List<Product> findProductsByCategory(Category category){
-        return this.productRepository.findByCategory(category);
+    public List<Product> findProductsByCategory(Integer categoryId){
+        return this.productRepository.findByCategoryId(categoryId);
     }
 
-    public List<Product> findProductsBySupplier(Supplier supplier){
-        return this.productRepository.findBySupplier(supplier);
+    public List<Product> findProductsBySupplier(Integer supplierId){
+        return this.productRepository.findBySupplierId(supplierId);
     }
 
     public List<Product> findProductsByPriceBetween(BigDecimal minPrice, BigDecimal maxPrice){

@@ -51,11 +51,11 @@ public class StockMovementService {
         return this.stockMovementRepository.findByDateBetween(startDate, endDate);
     }
 
-    public List<StockMovement> findStockMovementsByProduct(Product product) {
-        return this.stockMovementRepository.findByProduct(product);
+    public List<StockMovement> findStockMovementsByProduct(Integer productId) {
+        return this.stockMovementRepository.findByProductId(productId);
     }
 
-    public List<StockMovement> findStockMovementsByWarehouse(Warehouse warehouse) {
-        return this.stockMovementRepository.findByWarehouse(warehouse);
+    public List<StockMovement> findStockMovementsByWarehouse(Integer warehouseId) {
+        return this.stockMovementRepository.findByWarehouseId(warehouseId);
     }
 }
